@@ -1,0 +1,36 @@
+package fpt.backend.taskManagement.task;
+
+import ch.qos.logback.core.util.StringUtil;
+import org.springframework.data.jpa.domain.Specification;
+
+import java.util.List;
+
+public class TaskSpec {
+    private TaskSpec(){}
+    public static Specification<Task> hasStatus(List<String> statusList){
+        return (root, query, builder) -> {
+            if (statusList == null || statusList.isEmpty()) {
+                return builder.conjunction();
+            }
+            return root.get("status").in(statusList);
+        };
+    }
+
+    public static Specification<Task> hasPriority(List<String> priorityList){
+        return (root, query, builder) -> {
+            if (priorityList == null || priorityList.isEmpty()) {
+                return builder.conjunction();
+            }
+            return root.get("priority").in(priorityList);
+        };
+    }
+
+    public static  Specification<Task> nameLike(String name){
+        return (root, query, builder) -> {
+            if(StringUtil.isNullOrEmpty(name)){
+                return builder.conjunction();
+            }
+            return builder.like(builder.lower(root.get("name")),"%" + name.toLowerCase() + "%");
+        };
+    }
+}

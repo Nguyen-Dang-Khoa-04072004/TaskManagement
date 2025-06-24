@@ -1,0 +1,99 @@
+# Simple Task Management API
+This is simple api to practice Spring Boot Framework
+
+# Installation
+1. Clone the repo
+```
+git clone https://github.com/Nguyen-Dang-Khoa-04072004/TaskManagement
+```
+2. run project with docker compose
+```
+docker compose up -d
+```
+# Techniques
+- Simple CRUD operations with spring data JPA
+- Global exception handling use @ControllerAdvice
+- Unit testing with JUnit5 and Mockito
+- Apply continuous intergration with github action
+- Containerize java application use docker compose
+# Endpoints
+## URI: http://localhost:8080/api
+## GET /tasks - Retrieve all task
+### Query parameters
+- name : string (Search a name like pattern %{name}% )
+- status : string (Filter by status) with accepted values { PLANNING, ON_PROGRESS, PENDING, COMPLETE } 
+- priority : string (Filter by Priority) with acepted values { LOW, MEDIUM, HIGH }
+### Response 
+```
+{
+    "status": String,
+    "message": String,
+    "tasks": [
+        {
+            "id": Long,
+            "name": String,
+            "status": String,
+            "priority": String
+        }
+    ]
+}
+```
+## GET/tasks/{taskId} - Retrieve a task with specific task id
+### Response
+```
+{
+    "status": String,
+    "message": String,
+    "task": {
+        "id": Long,
+        "name": String,
+        "status": String,
+        "priority": String
+    }
+}
+```
+## POST /tasks - Create a new task
+### Request header
+```
+  Content-Type: application/json
+```
+### Request body
+```
+{
+    "name": String,
+    "priority": String, accepted values { PLANNING, ON_PROGRESS, PENDING, COMPLETE }
+    "status": String accepted values { LOW, MEDIUM, HIGH }
+}
+```
+### Response
+```
+{
+    "status": String,
+    "message": String,
+    "task": {
+        "id": Long,
+        "name": String,
+        "status": String,
+        "priority": String
+    }
+}
+```
+## PUT /tasks/{taskId} - Update a task
+### Request header
+```
+  Content-Type: application/json
+```
+### Request body (Required 1 field to update)
+```
+{
+    "name": String, 
+    "priority": String, accepted values { PLANNING, ON_PROGRESS, PENDING, COMPLETE } 
+    "status":"COMPLETE" accepted values { LOW, MEDIUM, HIGH } 
+}
+```
+### Response
+No content
+
+## DELETE /tasks/{taskId} - Delete a task
+### Response
+No content

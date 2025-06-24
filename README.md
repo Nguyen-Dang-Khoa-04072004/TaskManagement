@@ -12,6 +12,7 @@ docker compose up -d
 ```
 # Techniques
 - Simple CRUD operations with spring data JPA
+- Search and filter with criteria query 
 - Global exception handling use @ControllerAdvice
 - Unit testing with JUnit5 and Mockito
 - Apply continuous intergration with github action
@@ -26,6 +27,7 @@ docker compose up -d
 ### Response 
 ```
 {
+    "code" : int,
     "status": String,
     "message": String,
     "tasks": [
@@ -42,6 +44,7 @@ docker compose up -d
 ### Response
 ```
 {
+    "code" : int,
     "status": String,
     "message": String,
     "task": {
@@ -68,6 +71,7 @@ docker compose up -d
 ### Response
 ```
 {
+    "code" : int,
     "status": String,
     "message": String,
     "task": {
@@ -92,7 +96,19 @@ docker compose up -d
 }
 ```
 ### Response
-No content
+```
+{
+    "code" : int,
+    "status": String,
+    "message": String,
+    "task": {
+        "id": Long,
+        "name": String,
+        "status": String,
+        "priority": String
+    }
+}
+```
 
 ## DELETE /tasks/{taskId} - Delete a task
 ### Response

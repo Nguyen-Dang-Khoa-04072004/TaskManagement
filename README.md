@@ -10,7 +10,7 @@ git clone https://github.com/Nguyen-Dang-Khoa-04072004/TaskManagement
 ```
 docker compose up -d
 ```
-# Techniques
+# Features
 - Simple CRUD operations with spring data JPA
 - Search and filter with criteria query 
 - Global exception handling use @ControllerAdvice

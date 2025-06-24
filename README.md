@@ -34,7 +34,7 @@ docker compose up -d
         {
             "id": Long,
             "name": String,
-            "status": String,
+            "isCompleted": Boolean,
             "priority": String
         }
     ]
@@ -50,7 +50,7 @@ docker compose up -d
     "task": {
         "id": Long,
         "name": String,
-        "status": String,
+        "isCompleted": Boolean,
         "priority": String
     }
 }
@@ -77,7 +77,7 @@ docker compose up -d
     "task": {
         "id": Long,
         "name": String,
-        "status": String,
+        "isCompleted": Boolean,
         "priority": String
     }
 }
@@ -104,7 +104,7 @@ docker compose up -d
     "task": {
         "id": Long,
         "name": String,
-        "status": String,
+        "isCompleted": Boolean,
         "priority": String
     }
 }

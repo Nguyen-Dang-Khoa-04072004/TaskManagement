@@ -21,9 +21,9 @@ docker compose up -d
 ## URI: http://localhost:8080/api
 ## GET /tasks - Retrieve all task
 ### Query parameters
-- name : string (Search a name like pattern %{name}% )
-- status : string (Filter by status) with accepted values { PLANNING, ON_PROGRESS, PENDING, COMPLETE } 
-- priority : string (Filter by Priority) with acepted values { LOW, MEDIUM, HIGH }
+- name : String (Search a name like pattern %{name}% )
+- status : String (Filter by status) with accepted values { PLANNING, ON_PROGRESS, PENDING, COMPLETE } 
+- priority : String (Filter by Priority) with acepted values { LOW, MEDIUM, HIGH }
 ### Response 
 ```
 {

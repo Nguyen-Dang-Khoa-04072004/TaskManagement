@@ -1,5 +1,5 @@
 # Simple Task Management API
-This is simple api to practice Spring Boot Framework
+The simple task management api to practice Spring Boot Framework
 
 # Installation
 1. Clone the repo
@@ -16,7 +16,7 @@ docker compose up -d
 - Global exception handling use @ControllerAdvice
 - Unit testing with JUnit5 and Mockito
 - Apply continuous intergration with github action
-- Containerize java application use docker compose
+- Containerize java application by docker compose
 # Endpoints
 ## URI: http://localhost:8080/api
 ## GET /tasks - Retrieve all task

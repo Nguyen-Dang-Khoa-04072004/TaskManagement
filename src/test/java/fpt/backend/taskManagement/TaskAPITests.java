@@ -41,8 +41,8 @@ public class TaskAPITests {
 
     private TaskAPITests(){
         // create the mock data
-        mockTasks.add( new Task("Learn English", Status.ON_PROGRESS,Priority.HIGH));
-        mockTasks.add( new Task("Learn Java", Status.ON_PROGRESS,Priority.HIGH));
+        mockTasks.add( new Task("Learn English", false,Priority.HIGH));
+        mockTasks.add( new Task("Learn Java", true,Priority.HIGH));
     }
 
 

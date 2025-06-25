@@ -26,7 +26,7 @@ public class RepositoryTest {
         Assertions.assertEquals(task.isPresent(),true);
         Task foundTask = task.get();
         Assertions.assertEquals(foundTask.getName(),"Learn Java");
-        Assertions.assertEquals(foundTask.getStatus(),Status.ON_PROGRESS);
+        Assertions.assertEquals(foundTask.getIsCompleted(),false);
         Assertions.assertEquals(foundTask.getPriority(),Priority.HIGH);
     }
 

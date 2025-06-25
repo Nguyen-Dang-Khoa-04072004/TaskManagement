@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
-@Disabled
+
 @SpringBootTest
 public class RepositoryTest {
 

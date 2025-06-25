@@ -10,16 +10,15 @@ public class Task {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private Boolean isCompleted;
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
     private Task(){};
 
-    public Task(String name, Status status, Priority priority) {
+    public Task(String name, Boolean isCompleted, Priority priority) {
         this.name = name;
-        this.status = status;
+        this.isCompleted = isCompleted;
         this.priority = priority;
     }
 
@@ -31,10 +30,6 @@ public class Task {
         return name;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
     public Priority getPriority() {
         return priority;
     }
@@ -43,11 +38,15 @@ public class Task {
         this.name = name;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public Boolean getIsCompleted() {
+        return isCompleted;
+    }
+
+    public void setIsCompleted(Boolean completed) {
+        isCompleted = completed;
     }
 }

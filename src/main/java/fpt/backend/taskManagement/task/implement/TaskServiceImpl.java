@@ -1,5 +1,6 @@
 package fpt.backend.taskManagement.task.implement;
 
+import fpt.backend.taskManagement.exception.BadRequestException;
 import fpt.backend.taskManagement.exception.TaskNotFoundException;
 import fpt.backend.taskManagement.task.*;
 import fpt.backend.taskManagement.task.request.AddTaskRequest;
@@ -17,9 +18,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getAllTasks(String name, List<String> statusList, List<String> priorityList) {
+    public List<Task> getAllTasks(String name, Boolean isCompleted, List<String> priorityList) {
         Specification<Task> filter =
-            TaskSpec.nameLike(name).and(TaskSpec.hasStatus(statusList)).and(TaskSpec.hasPriority(priorityList));
+            TaskSpec.nameLike(name).and(TaskSpec.isCompleted(isCompleted)).and(TaskSpec.hasPriority(priorityList));
         return taskRepository.findAll(filter);
     }
 
@@ -30,18 +31,21 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task createTask(AddTaskRequest request) {
+        if(request.getName() == null || request.getName().isEmpty()){
+            throw new BadRequestException("Task name must be specified");
+        }
         return taskRepository.save(
-            new Task(request.getName(), request.getStatus(), request.getPriority())
+            new Task(request.getName(), request.getIsCompleted(), request.getPriority())
         );
     }
 
     @Override
-    public void updateTask(Long id, UpdateTaskRequest request) {
+    public Task updateTask(Long id, UpdateTaskRequest request) {
         Task task = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException());
         task.setName(request.getName() == null ? task.getName() : request.getName());
-        task.setStatus(request.getStatus()  == null ? task.getStatus() : request.getStatus());
+        task.setIsCompleted(request.getIsCompleted()  == null ? task.getIsCompleted() : request.getIsCompleted());
         task.setPriority(request.getPriority()  == null ? task.getPriority() : request.getPriority());
-        taskRepository.save(task);
+        return taskRepository.save(task);
     }
 
 

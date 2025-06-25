@@ -1,12 +1,14 @@
 package fpt.backend.taskManagement.task;
 
-import fpt.backend.taskManagement.task.reponse.TaskResponse;
-import fpt.backend.taskManagement.task.reponse.TasksResponse;
+import fpt.backend.taskManagement.task.response.TaskResponse;
+import fpt.backend.taskManagement.task.response.TasksResponse;
 import fpt.backend.taskManagement.task.request.AddTaskRequest;
 import fpt.backend.taskManagement.task.request.UpdateTaskRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -19,15 +21,16 @@ public class TaskController {
     @GetMapping
     public ResponseEntity<TasksResponse> getAllTask(
         @RequestParam(name = "name", required = false) String name,
-        @RequestParam(name = "status", required = false) List<String> statusList,
+        @RequestParam(name = "isCompleted", required = false) Boolean isCompleted,
         @RequestParam(name = "priority", required = false) List<String> priorityList
     )
     {
-            List<Task> tasks = taskService.getAllTasks(name, statusList, priorityList);
+            List<Task> tasks = taskService.getAllTasks(name, isCompleted, priorityList);
             TasksResponse responseBody = new TasksResponse();
+            responseBody.setCode(200);
             responseBody.setStatus("Success");
             responseBody.setMessage("Get all tasks successfully");
-            responseBody.setTask(tasks);
+            responseBody.setTasks(tasks);
             return ResponseEntity.ok(responseBody);
     }
 
@@ -35,20 +38,32 @@ public class TaskController {
     public ResponseEntity<TaskResponse> getTask(@PathVariable Long id){
         Task task = taskService.getTask(id);
         TaskResponse responseBody = new TaskResponse();
+        responseBody.setCode(200);
         responseBody.setStatus("Success");
-        responseBody.setMessage("Get a task successfully");
+        responseBody.setMessage("Get a task successfully!");
         responseBody.setTask(task);
         return ResponseEntity.ok(responseBody);
     }
     @PostMapping
-    public Task createTask(@RequestBody AddTaskRequest request){
-        return taskService.createTask(request);
+    public ResponseEntity<TaskResponse> createTask(@RequestBody @Validated  AddTaskRequest request){
+        Task task = taskService.createTask(request);
+        TaskResponse responseBody = new TaskResponse();
+        responseBody.setCode(201);
+        responseBody.setStatus("Success");
+        responseBody.setMessage("Create a new task successfully!");
+        responseBody.setTask(task);
+        return ResponseEntity.created(URI.create("http://localhost:8080/api/tasks/" + task.getId())).body(responseBody);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateTask(@PathVariable Long id, @RequestBody UpdateTaskRequest request){
-        taskService.updateTask(id,request);
-        return ResponseEntity.noContent().build();
+        Task task = taskService.updateTask(id,request);
+        TaskResponse responseBody = new TaskResponse();
+        responseBody.setCode(200);
+        responseBody.setStatus("Success");
+        responseBody.setMessage("Update a task successfully!");
+        responseBody.setTask(task);
+        return ResponseEntity.ok(responseBody);
     }
 
     @DeleteMapping("/{id}")

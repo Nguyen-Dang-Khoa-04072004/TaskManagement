@@ -1,7 +1,6 @@
 package fpt.backend.taskManagement;
 
 import fpt.backend.taskManagement.task.Priority;
-import fpt.backend.taskManagement.task.Status;
 import fpt.backend.taskManagement.task.Task;
 import fpt.backend.taskManagement.task.TaskRepository;
 import org.junit.jupiter.api.Assertions;
